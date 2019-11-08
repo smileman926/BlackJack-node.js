@@ -906,16 +906,17 @@ function dealCards(players, dealer) {
   if ($('.primary').attr('id') === 'player-hand') {
     setTimeout(function () {
       $('#player-box').removeClass('hidden');
-
+     
       $('#hit-button').text('HIT');
       $('#hit-button').removeClass('removed');
-
+        
       $('#stand-button').text('STAND');
       $('#stand-button').removeClass('removed');
 
       $('#double-button').removeClass('removed');
-
+      $('#double-button').text('DOUBLE');
       $('#split-button').removeClass('removed');
+      $('#split-button').text('SPLIT');
 
       socket.emit('player ready');
     }, timeout);
@@ -1562,8 +1563,8 @@ if($dealerCount.length<3){
         })
       }
 
-      $doubleButton.addClass('removed');
-      $splitButton.addClass('removed');
+      // $doubleButton.addClass('removed');
+      // $splitButton.addClass('removed');
       
       clearTimeout(globalTimeout1);
       clearInterval(countTimerout);
@@ -1575,8 +1576,13 @@ if($dealerCount.length<3){
       $standButton.removeClass('subdued');
       // $('.chip-image').remove();
       
-  
-      $hitButton.text("I'M IN");
+      $doubleButton.removeClass('subdued');
+      $splitButton.removeClass('subdued');
+      
+      $doubleButton.text('REBET');
+      $splitButton.text('REBET*2');
+      
+      $hitButton.text("CHANGE BET");
       $standButton.text("I'M OUT");
       console.log('Timer 4 Started');
 
