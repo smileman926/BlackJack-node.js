@@ -917,7 +917,7 @@ function dealCards(players, dealer) {
       $('#double-button').text('DOUBLE');
       $('#split-button').removeClass('removed');
       $('#split-button').text('SPLIT');
-
+      dsafdasf
       socket.emit('player ready');
     }, timeout);
   }
