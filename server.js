@@ -6,7 +6,7 @@ var app  		= express();
 var path 		= require('path');
 var bodyParser 	= require('body-parser');
 var flash 		= require('connect-flash');
-
+asdfsdafasdfsdf
 // Chat application components
 var routes 		= require('./app/routes');
 var session 	= require('./app/session');
