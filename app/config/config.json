@@ -1,0 +1,27 @@
+{
+	"db": {
+		"username": "",
+		"password": "",
+		"host": "localhost",
+		"port": "27017",
+		"name": "mytest1"
+	},
+	"sessionSecret": "myString",
+	"facebook": {
+		"clientID": "748394548917098",
+		"clientSecret": "ce9105c78651e6c1cc0e45809c166ce2",
+		"callbackURL": "/auth/facebook/callback",
+		"profileFields": ["id", "displayName", "photos","email"]
+	},
+	"google": {
+		"clientID": "585604580890-dp9nlh79gjpc6d9cttu6cpn84hs2vkj9.apps.googleusercontent.com",
+		"clientSecret": "APqKhLgQGpu54vJtT5vgGayg",
+		"callbackURL": "/auth/twitter/callback",
+		"profileFields": ["id", "displayName", "photos"]
+	},
+	"redis": {
+		"host": "127.0.0.1",
+		"port": 6379,
+		"password": ""
+	}
+}

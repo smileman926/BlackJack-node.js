@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Chat IO</title>
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+   <div class="login-page">
+      <div class="form">
+        <div style="width:100%" >
+     
+          <!-- 👋 Check out other cool stuff  -->
+            <img src="img/Games_Blackjack.png" style="width:100%"></img>
+        </div>
+      
+
+        <div class="form-line"></div>
+
+        <div style="margin-top: 18px;">
+            <form action="/forgot" class="reset_password_form" method="post" >
+              <input type="text" name="email" placeholder="Email Address"/>
+              <button type="submit">Reset</button>
+             </form>
+             <% if (errors != null) { %>
+                <% errors.forEach(function(err){ %>
+                  <p class="message error"><%= err %></p>
+                <% }); %>
+              <% } %>
+          
+        </div>
+    </div> <!-- end form -->
+    </div> <!-- end login container -->
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+   
+    <script>
+    </script>
+  </body>
+</html>
