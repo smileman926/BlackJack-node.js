@@ -632,6 +632,11 @@ function removePlayer(leftPlayer) {
     }
   }
 }
+function reBet(turn,betBudget) {
+  
+  socket.emit('previewCharge',{id:player.id});
+  setBet(betBudget);
+}
 var globalTimeout;
 // PROVIDES INPUT FIELD FOR PLAYER TO INPUT BET AMOUNT
  betmoney=0;
@@ -1622,6 +1627,25 @@ countTimerout=setInterval(function(){
         leaveGame();
         
       } );
+      $doubleButton.one('click',function(){
+        clearTimeout(timer111);
+        console.log('Timer 4 End');
+        clearInterval(countTimerout);
+        console.log(player);
+        $('.counttimer_down').css('visibility','hidden');
+        // resetGame();
+        rebetGame(player.bet);
+        
+      } );
+      $splitButton.one('click',function(){
+        clearTimeout(timer111);
+        console.log('Timer 4 End');
+        clearInterval(countTimerout);
+        $('.counttimer_down').css('visibility','hidden');
+        // resetGame();
+        rebetGame(player.bet*2);
+        
+      } );
     
     } else {
       // for everyone who's not a player, give them the option to join as a player...
@@ -1718,6 +1742,35 @@ function resetGame() {
     $('#button-bar').children().addClass('subdued');
     $('#button-bar').children().off('click');
     placeBet(player);
+  } else {
+    $('#message').text('You\'re outta cash! Get outta here, ya bum!');
+    leaveGame();
+  };
+
+};
+
+function rebetGame(betBudget) {
+  
+  resetBoard();
+  
+  player.hand = [];
+  dealer.hand = [];
+  // console.log('Player ID : ++++ '+ player.id);
+  socket.emit('previewCharge',{id:player.id});
+  if (player.doubleDown) {
+    player.bet /= 2;
+    player.doubleDown = false;
+  }
+
+  if (player.splitHand) {
+    player.splitHand = null;
+  }
+
+  if($('.primary').attr('id') === 'player-hand' && player.money > 0) {
+    $('#button-bar').children().addClass('removed');
+    $('#button-bar').children().addClass('subdued');
+    $('#button-bar').children().off('click');
+    reBet(player,betBudget);
   } else {
     $('#message').text('You\'re outta cash! Get outta here, ya bum!');
     leaveGame();
