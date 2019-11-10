@@ -13,8 +13,21 @@ else
 {
 	$('#background>img').css('height',$(window).height());
 	$('#background>img').css('width','auto');
-	}
+  }
+  function resizeCoin(){
+    console.log('Coin Resized');
+    $elements=$('body').children('.chipBtn');
+  
+    var x=$('#dealer-hand').offset().left+30;
+    var y=$('#dealer-hand').offset().top+50;
+    console.log(x+':'+y);  
+    for(var i=0;i<$elements.length;i++){
+      $elements.eq(i).css('left',x++).css('top',y--);
+    }
+  }
 $(window).resize(function(){
+  console.log('resized');
+  
 	if($(window).width()>$(window).height()*1.76)
 {
 	$('#background>img').css('width',$(window).width());
@@ -26,7 +39,13 @@ else
 	$('#background>img').css('width','auto');
 	
 }
-	
+setTimeout(function(){
+  resizeCoin();
+  console.log('restart');  
+}
+
+  ,100);
+
 });
 
 alert($('body').css('width'));
@@ -651,11 +670,12 @@ function placeBet(turn) {
   $betForm.append($inputBet).append($submitBet).append($clearBet);
   $messageBox.append($betForm);
   $('.chipBtn').off('click');
-  var x=$('#dealer-hand').offset().left+$('#dealer-hand').width()/3;
-  var y=$('#dealer-hand').offset().top+50;
   console.log($('#dealer-hand').height());
   $('.chipBtn').on('click',function(event){
-
+    resizeCoin();
+    var x=$('#dealer-hand').offset().left+30;
+  var y=$('#dealer-hand').offset().top+50;
+    var countChip=$('body').children('.chipBtn').length;
     console.log('Click');
     var xi=$(this).offset().left;
     var yi=$(this).offset().top;
@@ -665,8 +685,8 @@ function placeBet(turn) {
     $('body').append($tempChip);
 
     $tempChip.animate({
-      left: x++,
-      top: y--
+      left: x+countChip,
+      top: y-countChip
            });
      
     betmoney=betmoney+ parseInt($(this).parent().attr('price'));
