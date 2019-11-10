@@ -10,11 +10,26 @@ body {
   background-size: cover;
   background-position: bottom center;
   background-repeat: no-repeat;
-  text-align: center;
+  
   color: white;
   width: 100%;
   
   height: 100%;
+}
+.chipBtn
+{
+  position: absolute;  
+}
+.chip-image
+{
+  width: 70px;
+  height: 70px;
+  float: left;
+}
+.chipBtn
+{
+  width:70px;
+  height: 70px;
 }
 #background {
     top:0;
@@ -220,9 +235,9 @@ height: 40px;
 box-sizing: border-box;
 transform: translateY(120px);
 -webkit-transform: translateY(120px);
-z-index: 50;
+z-index: 51;
 }
-.chip-image > img{
+.chipBtn{
   width:70px;
   height:70px;
 }
@@ -886,10 +901,7 @@ button:active {
   border: none;
   /* border-radius: 10px; */
 }
-.chip-image:hover > img{
-  width:80px;
-  height: 80px;
-}
+
 .remove_important{
   display: none !important;
 }
@@ -1146,15 +1158,17 @@ button:active {
   {
     font-size:25px;
   }
-   .chip-image > img
+    .chipBtn
   {
     width:50px;
     height:50px;
   }
-  .chip-image:hover > img{
-    width:60px;
-    height: 60px;
+  .chip-image
+  {
+    width:50px;
+    height:50px;
   }
+ 
   @keyframes flipover {
   0% {
     transform: perspective(500px) translate3d(0px, 0px, 0px) rotateY(-180deg);
@@ -1206,15 +1220,16 @@ button:active {
   {
     font-size:25px;
   }
-  .chip-image > img
+   .chipBtn
   {
     width:40px;
     height:40px;
   }
-  .chip-image:hover > img
+ 
+  .chip-image
   {
-	   width:50px;
-    height:50px;
+    width:40px;
+    height:40px;
   }
   
     .counttimer_down
