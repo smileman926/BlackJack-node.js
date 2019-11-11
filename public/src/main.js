@@ -13,8 +13,21 @@ else
 {
 	$('#background>img').css('height',$(window).height());
 	$('#background>img').css('width','auto');
-	}
+  }
+  function resizeCoin(){
+    console.log('Coin Resized');
+    $elements=$('body').children('.chipBtn');
+  
+    var x=$('#dealer-hand').offset().left+30;
+    var y=$('#dealer-hand').offset().top+50;
+    console.log(x+':'+y);  
+    for(var i=0;i<$elements.length;i++){
+      $elements.eq(i).css('left',x++).css('top',y--);
+    }
+  }
 $(window).resize(function(){
+  console.log('resized');
+  
 	if($(window).width()>$(window).height()*1.76)
 {
 	$('#background>img').css('width',$(window).width());
@@ -26,7 +39,13 @@ else
 	$('#background>img').css('width','auto');
 	
 }
-	
+setTimeout(function(){
+  resizeCoin();
+  console.log('restart');  
+}
+
+  ,100);
+
 });
 
 alert($('body').css('width'));
@@ -277,11 +296,11 @@ function setUpTable () {
   
   $('#card-table').append($chipsArea);
   console.log('Re Insert ');
-  let $fivechip=$('<div>',{'id':'five-chip','class':'chip-image','price':'5'}).html('<img src="../img/5.png"></img>');
-  let $tenchip=$('<div>',{'id':'ten-chip','class':'chip-image','price':'10'}).html('<img src="../img/10.png"></img>');
-  let $twelvechip=$('<div>',{'id':'twelve-chip','class':'chip-image','price':'25'}).html('<img src="../img/25.png"></img>');
-  let $fiftychip=$('<div>',{'id':'fifty-chip','class':'chip-image','price':'50'}).html('<img src="../img/50.png"></img>');
-  let $fivehchip=$('<div>',{'id':'fiveh-chip','class':'chip-image','price':'500'}).html('<img src="../img/500.png"></img>');
+  let $fivechip=$('<div>',{'id':'five-chip','class':'chip-image','price':'5','position':'absolute'}).html('<img class="chipBtn" src="../img/5.png"></img>');
+  let $tenchip=$('<div>',{'id':'ten-chip','class':'chip-image','price':'10','position':'absolute'}).html('<img class="chipBtn" src="../img/10.png"></img>');
+  let $twelvechip=$('<div>',{'id':'twelve-chip','class':'chip-image','price':'25','position':'absolute'}).html('<img  class="chipBtn" src="../img/25.png"></img>');
+  let $fiftychip=$('<div>',{'id':'fifty-chip','class':'chip-image','price':'50','position':'absolute'}).html('<img class="chipBtn" src="../img/50.png"></img>');
+  let $fivehchip=$('<div>',{'id':'fiveh-chip','class':'chip-image','price':'500','position':'absolute'}).html('<img class="chipBtn" src="../img/500.png"></img>');
   $('#chips-area').append($fivechip);
   $('#chips-area').append($tenchip);
   $('#chips-area').append($twelvechip);
@@ -641,11 +660,12 @@ var globalTimeout;
 // PROVIDES INPUT FIELD FOR PLAYER TO INPUT BET AMOUNT
  betmoney=0;
 function placeBet(turn) {
+  player.bet=0;
   let $betForm = $('<div>', {'id': 'bet-form'});
-  let $inputBet = $('<input>', {'type': 'text', 'class':'bet_value','disabled':'disabled','id': 'input-bet', 'min': 1, 'max': `${player.money}`, 'value': `${player.bet || 10}`, 'formmethod': 'post', 'size': '4'});
+  let $inputBet = $('<input>', {'type': 'text', 'class':'bet_value','disabled':'disabled','id': 'input-bet', 'min': 1, 'max': `${player.money}`, 'value': `${player.bet || 0}`, 'formmethod': 'post', 'size': '4'});
   let $submitBet = $('<input>', {'type': 'submit', 'id': 'submit-bet', 'value': 'BET'});
   let $clearBet = $('<input>', {'type': 'button', 'id': 'clear-bet', 'value': 'CLEAR'});
- 
+  
   let $messageBox = $('#message');
   betmoney=0;
   $('#chips-area').removeClass('remove_important');
@@ -654,12 +674,28 @@ function placeBet(turn) {
   $messageBox.html('');
   $betForm.append($inputBet).append($submitBet).append($clearBet);
   $messageBox.append($betForm);
-  $('.chip-image').off('click');
-  $('.chip-image').on('click',function(event){
+  $('.chipBtn').off('click');
+  console.log($('#dealer-hand').height());
+  $('.chipBtn').on('click',function(event){
+    resizeCoin();
+    var x=$('#dealer-hand').offset().left+30;
+  var y=$('#dealer-hand').offset().top+50;
+    var countChip=$('body').children('.chipBtn').length;
+    console.log('Click');
+    var xi=$(this).offset().left;
+    var yi=$(this).offset().top;
+    console.log(xi);
+    $tempChip=$(this).clone();
+    $tempChip.css('left',xi).css('top',yi);
+    $('body').append($tempChip);
 
-    console.log('onclick'+betmoney);
-     betmoney=betmoney+ parseInt($(this).attr('price'));
-     $inputBet.val(betmoney);
+    $tempChip.animate({
+      left: x+countChip,
+      top: y-countChip
+           });
+     
+    betmoney=betmoney+ parseInt($(this).parent().attr('price'));
+     $inputBet.val(betmoney);});
     //  setTimeout(function() {
     //   console.log("Event Target");
     //    console.log($inputBet.target.value);
@@ -667,7 +703,7 @@ function placeBet(turn) {
     //      $('#input-bet').attr({'size': `${$inputBet.value.length + 1}`})
     //    }
     //  }, 5);
-  });
+  
   //   $inputBet.keyup(function(event) {
   //   let betAmount = parseInt($inputBet.val());
     
@@ -678,7 +714,7 @@ function placeBet(turn) {
   // });
 
    globalTimeout= setTimeout(function(){$('#chips-area').addClass('remove_important');
-   leaveGame();console.log('global start');clearTimeout(globalTimeout);clearInterval(countTimerout);$('.counttimer_down').css('visibility','hidden');},waitingTime);
+   leaveGame();console.log('global start');clearTimeout(globalTimeout);clearInterval(countTimerout);$('.counttimer_down').css('visibility','hidden'); $('body').children('.chipBtn').remove();},waitingTime);
    countTime=30;
    clearInterval(countTimerout);
    countTimerout=setInterval(function(){
@@ -701,6 +737,7 @@ function placeBet(turn) {
   $clearBet.on('click',function(){
          $inputBet.val('0');
          betmoney=0;
+         $('body').children('.chipBtn').remove();
          betAmount=0;
   });
 };
@@ -709,6 +746,7 @@ function placeBet(turn) {
 function setBet(betAmount) {
   let $messageBox = $('#message');
   if (betAmount > 0 && betAmount <= player.money) {
+    $('body').children('.chipBtn').remove();
     player.bet = betAmount;
     player.money -= player.bet;
     
@@ -728,7 +766,7 @@ function setBet(betAmount) {
   } else {
   clearTimeout(globalTimeout);
   clearInterval(countTimerout);
-globalTimeout= setTimeout(function(){leaveGame();clearTimeout(globalTimeout);clearInterval(countTimerout);$('.counttimer_down').css('visibility','hidden');$('#chips-area').addClass('remove_important');
+globalTimeout= setTimeout(function(){leaveGame();clearTimeout(globalTimeout);clearInterval(countTimerout);$('.counttimer_down').css('visibility','hidden');$('#chips-area').addClass('remove_important');$('body').children('.chipBtn').remove();
 },waitingTime);
 countTime=30;
 countTimerout=setInterval(function(){
@@ -739,6 +777,7 @@ countTimerout=setInterval(function(){
 },1000);
 
 $('#chips-area').removeClass('remove_important');
+$('body').children('.chipBtn').remove();
 $('.bet_value').val('0');
 player.bet=0;
 betmoney=0;
