@@ -1620,8 +1620,14 @@ if($dealerCount.length<3){
       $standButton.removeClass('subdued');
       // $('.chip-image').remove();
       
+      if(player.bet<=player.money){
+
       $doubleButton.removeClass('subdued');
+    }
+    if(player.bet*2<=player.money){
+
       $splitButton.removeClass('subdued');
+    }
       
       $doubleButton.text('REBET');
       $splitButton.text('REBET*2');
