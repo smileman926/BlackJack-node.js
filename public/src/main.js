@@ -1,5 +1,5 @@
 ﻿$(document).ready(function() {
-	alert($('body').css('overflow'));
+	
 //document.ontouchmove = function (e) {
   //e.preventDefault();
 //}
@@ -59,10 +59,7 @@ setTimeout(function(){
 
 });
 
-alert($('body').css('width'));
-alert($('body').css('height'));
-alert($('html').css('width'));
-alert($('html').css('height'));
+
 console.log('main.js loaded');
 var id=$('.id_list').html();
 var money=parseInt($(".user_price_list").html());
