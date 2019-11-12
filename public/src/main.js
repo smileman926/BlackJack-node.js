@@ -1453,7 +1453,7 @@ socket.on('turn over', function() {
       $('#message').html('<p>BUST!</p>');
       // $('body').children('.chipBtn').remove();
       $('body').children('.chipBtn').animate({bottom:"0px",top:"-1000px"},400);
-      setTimeout(function(){      $('body').children('.chipBtn').css("top","5000px");
+      setTimeout(function(){      $('body').children('.chipBtn').css("top","2000px");
     },500);
       $('#message p').delay(1000).fadeOut(400, function() {$(this).remove()});
       $('#player-bet p').html('$0');
@@ -1462,7 +1462,7 @@ socket.on('turn over', function() {
       player.money += (player.bet + (player.bet * 1.5));
       //$('#message').append($('<p>').text(`BLACKJACK! YOU WIN $${player.bet * 1.5}!`).delay(1000).fadeOut());
       $('#message').html(`<p>BLACKJACK! YOU WIN $${player.bet * 1.5}!</p>`);
-      $('body').children('.chipBtn').animate({bottom:"0px",top:"-1000px"},400);
+      $('body').children('.chipBtn').animate({bottom:"0px",top:"2000px"},500);
    
       // $('body').children('.chipBtn').remove();
       $('#message p').delay(1000).fadeOut(400, function() {$(this).remove()});
@@ -1487,7 +1487,7 @@ socket.on('turn over', function() {
       //$('#message').append($('<p>').text(`BLACKJACK! YOU WIN $${player.bet * 1.5}!`).delay(1000).fadeOut());
       $('#message').html(`<p>BLACKJACK! YOU WIN $${player.bet * 1.5}!</p>`);
       // $('body').children('.chipBtn').remove();
-      $('body').children('.chipBtn').animate({bottom:"0px",top:"5000px"},400);
+      $('body').children('.chipBtn').animate({bottom:"0px",top:"2000px"},500);
  
       $('#message p').delay(1000).fadeOut(400, function() {$(this).remove()});
       $('#player-money p').text(`$${centify(player.money)}`);
@@ -1706,8 +1706,12 @@ countTimerout=setInterval(function(){
         
       } );
       $splitButton.one('click',function(){
+      //  console.log('AAAA+++++++');
         clearTimeout(timer111);
         console.log('Timer 4 End');
+        $elements=$('body').children('.chipBtn').clone();
+        console.log($elements);
+        $('body').append($elements);
         resizeCoinAnimation();
         clearInterval(countTimerout);
         $('.counttimer_down').css('visibility','hidden');
@@ -1726,7 +1730,7 @@ countTimerout=setInterval(function(){
       }
       if(player.bet*2<=player.money){
   
-        $splitButton.removeClass('subdued').off('click');
+        $splitButton.removeClass('subdued');
       }
       else
       {
@@ -1767,20 +1771,20 @@ countTimerout=setInterval(function(){
       let $message = $('<p>').html(`${message}`).delay(1000).fadeOut(400, function() {$(this).remove()});
       // console.log('Message'+message);
      if(winStatus=='win'|| winStatus=='push'){
-      $('body').children('.chipBtn').animate({bottom:"0px",top:"5000px"},800);
+      $('body').children('.chipBtn').animate({bottom:"0px",top:"2000px"},800);
       
      }
      else if(winStatus=='lose')
      {
       $('body').children('.chipBtn').animate({bottom:"0px",top:"-100px"},300);
-      setTimeout(function(){$('body').children('.chipBtn').css('top','5000px')},600);
+      setTimeout(function(){$('body').children('.chipBtn').css('top','2000px')},600);
       
      
     }
      else
      {
        $('body').children('.chipBtn').addClass('hidden_chip');
-       $('body').children('.chipBtn').animate({bottom:"0px",top:"5000px"},800);
+       $('body').children('.chipBtn').animate({bottom:"0px",top:"2000px"},800);
      }
       $messageBox.append($message);
       
