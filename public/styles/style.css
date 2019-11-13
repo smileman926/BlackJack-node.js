@@ -1169,9 +1169,8 @@ button:active {
   }
 	 #chips-area
   {
-    transform: translateY(180px);
-    -webkit-transform: translateY(180px);
-    
+    position: absolute;
+    top:85%;    
   }
   .card
   {
