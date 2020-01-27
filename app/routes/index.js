@@ -140,8 +140,8 @@ router.post('/forgot', function(req, res, next) {
 			port: 465,
 			secure: true, // use SSL
 			auth: {
-				user: 'smileman926@gmail.com',
-				pass: 'Youngdragon123!@#'
+				user: '',
+				pass: ''
 			}
 		});
 		var mailOptions = {
